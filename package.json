@@ -1,0 +1,15 @@
+{
+  "name": "thistle-flooring",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Thistle Flooring — premium vinyl, laminate, hardwood, and carpet installation website",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "PORT=3000 node server.mjs",
+    "start": "node server.mjs",
+    "pages": "python3 _build_pages.py"
+  }
+}
