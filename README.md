@@ -21,6 +21,29 @@ Opens on [http://localhost:3000](http://localhost:3000). Railway sets `PORT` aut
 
 That’s the live site. Add a custom domain in the same Networking panel when you have one.
 
+### Quote form → Gmail
+
+The contact form posts to `/api/quote` and emails **thistleflooringinstalls@gmail.com**. It does not open the visitor’s mail app.
+
+Add this Railway variable (Variables tab on the service):
+
+| Variable | Value |
+|---|---|
+| `GMAIL_USER` | `thistleflooringinstalls@gmail.com` |
+| `GMAIL_APP_PASSWORD` | Google App Password (not the normal Gmail password) |
+| `QUOTE_TO` | `thistleflooringinstalls@gmail.com` |
+
+Create the App Password:
+
+1. Sign in to the Thistle Flooring Google account.
+2. Turn on [2-Step Verification](https://myaccount.google.com/signinoptions/two-step-verification) if it isn’t on.
+3. Open [App passwords](https://myaccount.google.com/apppasswords).
+4. Create a password for “Mail” / “Thistle Flooring website”.
+5. Paste the 16-character password into `GMAIL_APP_PASSWORD` on Railway (no spaces).
+6. Redeploy.
+
+Reply in Gmail goes to the customer, because the quote uses their address as Reply-To.
+
 Health check: `GET /health` returns `ok`.
 
 ## Pages
@@ -42,7 +65,8 @@ Health check: `GET /health` returns `ok`.
 ## Project layout
 
 ```
-server.mjs          Production static server (zero dependencies)
+server.mjs          Static site + POST /api/quote
+mail.mjs            Sends quote requests through Gmail
 railway.toml        Railway build & health check
 nixpacks.toml       Node 22 on Railway
 assets/             Optimized gallery + brand images

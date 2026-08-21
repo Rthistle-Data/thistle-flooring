@@ -4,6 +4,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { pipeline } from "node:stream";
 import { fileURLToPath } from "node:url";
+import { mailConfigured, sendQuote } from "./mail.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = __dirname;
@@ -124,16 +125,139 @@ function serve404(req, res) {
   send(res, 404, { "Content-Type": "text/plain; charset=utf-8" }, "Not found");
 }
 
-const server = http.createServer((req, res) => {
-  if (!["GET", "HEAD"].includes(req.method || "")) {
-    send(res, 405, { Allow: "GET, HEAD" }, "Method not allowed");
+const rate = new Map();
+const RATE_WINDOW_MS = 60 * 60 * 1000;
+const RATE_MAX = 8;
+
+function clientIp(req) {
+  const fwd = req.headers["x-forwarded-for"];
+  if (typeof fwd === "string" && fwd.trim()) return fwd.split(",")[0].trim();
+  return req.socket?.remoteAddress || "unknown";
+}
+
+function overLimit(ip) {
+  const now = Date.now();
+  const hits = (rate.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  hits.push(now);
+  rate.set(ip, hits);
+  return hits.length > RATE_MAX;
+}
+
+function readJsonBody(req, limit = 40_000) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on("data", (chunk) => {
+      size += chunk.length;
+      if (size > limit) {
+        const err = new Error("Payload too large");
+        err.status = 413;
+        reject(err);
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on("end", () => {
+      const raw = Buffer.concat(chunks).toString("utf8").trim();
+      if (!raw) {
+        resolve({});
+        return;
+      }
+      try {
+        resolve(JSON.parse(raw));
+      } catch {
+        const err = new Error("Invalid JSON");
+        err.status = 400;
+        reject(err);
+      }
+    });
+    req.on("error", reject);
+  });
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function json(res, status, payload) {
+  send(
+    res,
+    status,
+    {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+    },
+    JSON.stringify(payload)
+  );
+}
+
+async function handleQuote(req, res) {
+  if (overLimit(clientIp(req))) {
+    json(res, 429, { ok: false, error: "Please wait a bit before sending another request." });
     return;
   }
 
+  const body = await readJsonBody(req);
+  const name = String(body.name || "").trim();
+  const email = String(body.email || "").trim();
+  const phone = String(body.phone || "").trim();
+  const project = String(body.project || "").trim();
+  const sqft = String(body.sqft || "").trim();
+  const message = String(body.message || "").trim();
+  const honeypot = String(body.website || "").trim();
+
+  if (honeypot) {
+    json(res, 200, { ok: true });
+    return;
+  }
+  if (!name || name.length > 120) {
+    json(res, 400, { ok: false, error: "Please enter your name." });
+    return;
+  }
+  if (!email || !EMAIL_RE.test(email) || email.length > 200) {
+    json(res, 400, { ok: false, error: "Please enter a valid email address." });
+    return;
+  }
+  if (message.length > 4000 || phone.length > 40 || project.length > 80 || sqft.length > 40) {
+    json(res, 400, { ok: false, error: "That message is a bit too long. Try shortening it." });
+    return;
+  }
+  if (!mailConfigured()) {
+    json(res, 503, {
+      ok: false,
+      error: "Quote email isn’t set up on the server yet. Please text (587) 594-8169.",
+    });
+    return;
+  }
+
+  await sendQuote({ name, email, phone, project, sqft, message });
+  json(res, 200, { ok: true });
+}
+
+const server = http.createServer((req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   let pathname = url.pathname;
   if (pathname.length > 1 && pathname.endsWith("/")) {
     pathname = pathname.slice(0, -1);
+  }
+
+  if (pathname === "/api/quote" && req.method === "POST") {
+    handleQuote(req, res).catch((err) => {
+      console.error("Quote send failed:", err);
+      const status = err.status || 500;
+      json(res, status, {
+        ok: false,
+        error:
+          status === 413
+            ? "That request was too large."
+            : "Couldn’t send the quote just now. Please text (587) 594-8169.",
+      });
+    });
+    return;
+  }
+
+  if (!["GET", "HEAD"].includes(req.method || "")) {
+    send(res, 405, { Allow: "GET, HEAD, POST" }, "Method not allowed");
+    return;
   }
 
   if (pathname === "/health") {

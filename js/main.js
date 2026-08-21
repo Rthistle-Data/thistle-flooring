@@ -87,43 +87,84 @@
     });
   }
 
-  /* ── quote form → mailto ── */
+  /* ── quote form → server email ── */
   const form = document.getElementById("quote-form");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    const ok = form.querySelector(".form-success");
+    const errEl = form.querySelector(".form-error");
+    const btn = form.querySelector('button[type="submit"]');
+    const idleLabel = btn ? btn.textContent : "Send quote request";
+
+    const show = (el, on) => {
+      if (!el) return;
+      el.classList.toggle("is-on", Boolean(on));
+    };
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      const name = (data.get("name") || "").toString().trim();
-      const email = (data.get("email") || "").toString().trim();
-      const phone = (data.get("phone") || "").toString().trim();
-      const project = (data.get("project") || "").toString().trim();
-      const sqft = (data.get("sqft") || "").toString().trim();
-      const message = (data.get("message") || "").toString().trim();
+      const payload = {
+        name: (data.get("name") || "").toString().trim(),
+        email: (data.get("email") || "").toString().trim(),
+        phone: (data.get("phone") || "").toString().trim(),
+        project: (data.get("project") || "").toString().trim(),
+        sqft: (data.get("sqft") || "").toString().trim(),
+        message: (data.get("message") || "").toString().trim(),
+        website: (data.get("website") || "").toString().trim(),
+      };
 
-      if (!name || !email) {
+      if (!payload.name || !payload.email) {
         form.reportValidity();
         return;
       }
 
-      const subject = encodeURIComponent(
-        `Quote Request — ${project || "Flooring"} — ${name}`
-      );
-      const body = encodeURIComponent(
-        [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          phone ? `Phone: ${phone}` : "",
-          project ? `Project: ${project}` : "",
-          sqft ? `Approximate sq ft: ${sqft}` : "",
-          "",
-          message || "(No additional details)",
-        ]
-          .filter((line) => line !== "")
-          .join("\n")
-      );
-      window.location.href = `mailto:thistleflooringinstalls@gmail.com?subject=${subject}&body=${body}`;
-      const ok = document.querySelector(".form-success");
-      if (ok) ok.classList.add("is-on");
+      show(ok, false);
+      show(errEl, false);
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Sending…";
+      }
+
+      try {
+        const res = await fetch("/api/quote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok || !result.ok) {
+          throw new Error(result.error || "Couldn’t send the quote just now.");
+        }
+        form.reset();
+        show(ok, true);
+      } catch (err) {
+        if (errEl) {
+          errEl.textContent =
+            err.message || "Couldn’t send the quote. Please text (587) 594-8169.";
+        }
+        show(errEl, true);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = idleLabel;
+        }
+      }
+    });
+  }
+
+  const copyBtn = document.getElementById("copy-email");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const email = copyBtn.dataset.email || "thistleflooringinstalls@gmail.com";
+      try {
+        await navigator.clipboard.writeText(email);
+        copyBtn.textContent = "Email copied";
+        setTimeout(() => {
+          copyBtn.textContent = "Copy email address";
+        }, 2000);
+      } catch {
+        window.prompt("Copy email address", email);
+      }
     });
   }
 })();

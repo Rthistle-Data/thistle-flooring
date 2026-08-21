@@ -71,7 +71,7 @@ FOOTER = f"""    <section class="quote-band">
         <p>Tell us about the room. We’ll source the right material and install it with care — vinyl, laminate, hardwood, or carpet.</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="/contact#quote">Get a Free Quote</a>
-          <a class="btn btn-outline" href="{MAILTO}">Email {MAIL}</a>
+          <a class="btn btn-outline" href="/contact">Contact</a>
         </div>
         <p class="contact-mini">Text only · <a href="{SMS}">{PHONE}</a></p>
       </div>
@@ -528,19 +528,19 @@ CONTACT = f"""
           <p>Quotes are complimentary. Text is the fastest way to reach us; email is perfect for photos and measurements.</p>
           <dl>
             <dt>Email</dt>
-            <dd><a href="{MAILTO}">{MAIL}</a></dd>
+            <dd>{MAIL}</dd>
             <dt>Phone · text only</dt>
             <dd><a href="{SMS}">{PHONE}</a></dd>
             <dt>Service</dt>
             <dd>Vinyl · Laminate · Hardwood · Carpet<br>Alberta homeowners &amp; light commercial</dd>
           </dl>
-          <p style="margin-top:28px;"><a class="btn btn-gold" href="{MAILTO}">Open email app</a></p>
+          <p style="margin-top:28px;"><button type="button" class="btn btn-gold" id="copy-email" data-email="{MAIL}">Copy email address</button></p>
         </aside>
 
         <div>
           <p class="eyebrow">Quote request</p>
           <h2>Tell us about the floor.</h2>
-          <p class="form-note">Submitting opens your email with the details filled in, addressed to {MAIL}.</p>
+          <p class="form-note">We’ll email you back at the address you give. Nothing opens on your computer.</p>
           <form id="quote-form" style="margin-top:28px;" novalidate>
             <div class="form-row">
               <label>Name *
@@ -573,7 +573,9 @@ CONTACT = f"""
             <label>Details
               <textarea name="message" placeholder="Rooms involved, existing floor, timing, and anything we should know."></textarea>
             </label>
-            <p class="form-success">Your email app should open with the quote request. If it doesn’t, write us directly at {MAIL}.</p>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="form-success">Thank you — your quote request is on its way. We’ll be in touch shortly.</p>
+            <p class="form-error" role="alert"></p>
             <button class="btn btn-gold" type="submit">Send quote request</button>
           </form>
         </div>

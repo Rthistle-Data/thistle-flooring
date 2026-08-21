@@ -11,5 +11,8 @@
     "dev": "PORT=3000 node server.mjs",
     "start": "node server.mjs",
     "pages": "python3 _build_pages.py"
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.5"
   }
 }
