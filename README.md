@@ -19,7 +19,7 @@ Opens on [http://localhost:3000](http://localhost:3000). Railway sets `PORT` aut
 5. Railway detects Node, runs `npm start`, and binds `$PORT`.
 6. Open the service → **Settings → Networking → Generate domain**.
 
-That’s the live site. Add a custom domain in the same Networking panel when you have one.
+The public site is [https://thistle-flooring.com](https://thistle-flooring.com). Railway’s generated `*.up.railway.app` host 301-redirects to that domain so every page URL stays `thistle-flooring.com/...`.
 
 ### Quote form → Gmail
 
@@ -50,12 +50,12 @@ Health check: `GET /health` returns `ok`.
 
 | URL | File |
 |---|---|
-| `/` | Homepage |
-| `/services` | Vinyl ($3/sq ft vinyl click), laminate, hardwood, carpet |
-| `/winter-special` | Winter Hibernation Special — free carpet tear-out |
-| `/kitchen-revival` | Express Kitchen Floor Revival — $500 + material |
-| `/gallery` | Project photography |
-| `/contact` | Quote request |
+| `https://thistle-flooring.com/` | Homepage |
+| `https://thistle-flooring.com/services` | Vinyl ($3/sq ft vinyl click), laminate, hardwood, carpet |
+| `https://thistle-flooring.com/winter-special` | Winter Hibernation Special — free carpet tear-out |
+| `https://thistle-flooring.com/kitchen-revival` | Express Kitchen Floor Revival — $500 + material |
+| `https://thistle-flooring.com/gallery` | Project photography |
+| `https://thistle-flooring.com/contact` | Quote request |
 
 ## Contact
 

@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Disallow: /health
+
+Sitemap: https://thistle-flooring.com/sitemap.xml

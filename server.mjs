@@ -10,6 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = "0.0.0.0";
+const CANONICAL_HOST = "thistle-flooring.com";
 
 const ROUTES = {
   "/": "index.html",
@@ -233,11 +234,39 @@ async function handleQuote(req, res) {
   json(res, 200, { ok: true });
 }
 
+function requestHost(req) {
+  const raw = req.headers["x-forwarded-host"] || req.headers.host || "";
+  return String(raw).split(",")[0].trim().split(":")[0].toLowerCase();
+}
+
+function isDevHost(host) {
+  return (
+    !host ||
+    host === "localhost" ||
+    host === "127.0.0.1" ||
+    host === "::1" ||
+    host.endsWith(".railway.internal")
+  );
+}
+
+function canonicalLocation(req, pathname, search) {
+  if (pathname === "/health") return null;
+  const host = requestHost(req);
+  if (isDevHost(host) || host === CANONICAL_HOST) return null;
+  return `https://${CANONICAL_HOST}${pathname}${search}`;
+}
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   let pathname = url.pathname;
   if (pathname.length > 1 && pathname.endsWith("/")) {
     pathname = pathname.slice(0, -1);
+  }
+
+  const redirectTo = canonicalLocation(req, pathname, url.search);
+  if (redirectTo) {
+    send(res, 301, { Location: redirectTo, "Cache-Control": "public, max-age=3600" }, "");
+    return;
   }
 
   if (pathname === "/api/quote" && req.method === "POST") {

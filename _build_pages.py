@@ -3,12 +3,21 @@
 from pathlib import Path
 
 ROOT = Path("/home/regan/Desktop/thistleflooring")
+SITE = "https://thistle-flooring.com"
 MAIL = "thistleflooringinstalls@gmail.com"
 MAILTO = f"mailto:{MAIL}?subject=Quote%20Request%20%E2%80%94%20Thistle%20Flooring"
 PHONE = "(587) 594-8169"
 SMS = "sms:5875948169"
 
 GALLERY = [
+    ("vinyl-living-walnut.jpg", "vinyl", "Living room · walnut vinyl click"),
+    ("vinyl-rec-room-walnut.jpg", "vinyl", "Rec room · walnut vinyl click"),
+    ("vinyl-open-kitchen-walnut.jpg", "vinyl", "Open living & kitchen · walnut vinyl click"),
+    ("vinyl-hallway-gym.jpg", "vinyl", "Hallway · walnut vinyl click"),
+    ("vinyl-hallway-weights.jpg", "vinyl", "Hallway transition · walnut vinyl click"),
+    ("vinyl-stair-landing-walnut.jpg", "vinyl", "Stair landing · walnut vinyl click"),
+    ("vinyl-living-vent.jpg", "vinyl", "Living area · walnut vinyl click"),
+    ("vinyl-carpet-tearout.jpg", "vinyl", "Carpet tear-out for vinyl click"),
     ("vinyl-living-open.jpg", "vinyl", "Open-concept living · grey vinyl click"),
     ("vinyl-kitchen-grey.jpg", "vinyl", "Kitchen · grey vinyl click"),
     ("hardwood-white-oak.jpg", "hardwood", "Character white oak hardwood"),
@@ -31,6 +40,17 @@ GALLERY = [
     ("vinyl-install-progress-walnut.jpg", "vinyl", "Install in progress · walnut vinyl click"),
     ("carpet-commercial-stairwell.jpg", "carpet", "Commercial carpet · stairwell"),
     ("vinyl-install-progress-light.jpg", "vinyl", "Install in progress · light oak vinyl"),
+]
+
+PREVIEW = [
+    ("vinyl-living-walnut.jpg", "vinyl", "Living room · walnut vinyl click"),
+    ("vinyl-rec-room-walnut.jpg", "vinyl", "Rec room · walnut vinyl click"),
+    ("hardwood-white-oak.jpg", "hardwood", "Character white oak hardwood"),
+    ("carpet-residential-beige.jpg", "carpet", "Residential carpet · professionally stretched"),
+    ("vinyl-open-kitchen-walnut.jpg", "vinyl", "Open living & kitchen · walnut vinyl click"),
+    ("vinyl-stair-landing-walnut.jpg", "vinyl", "Stair landing · walnut vinyl click"),
+    ("hardwood-walnut.jpg", "hardwood", "Rich walnut hardwood"),
+    ("carpet-stairs-cream.jpg", "carpet", "Cream carpet stairs"),
 ]
 
 
@@ -89,7 +109,7 @@ FOOTER = f"""    <section class="quote-band">
       <div class="wrap-wide footer-grid">
         <div class="footer-brand">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
-          <p>Precision sourcing and installation of vinyl, laminate, hardwood, and carpet. Craftsmanship you can live with.</p>
+          <p>Based in Edmonton, Alberta. Precision sourcing and installation of vinyl, laminate, hardwood, and carpet. Craftsmanship you can live with.</p>
         </div>
         <div>
           <h4>Explore</h4>
@@ -115,7 +135,7 @@ FOOTER = f"""    <section class="quote-band">
             <li><a href="{MAILTO}">{MAIL}</a></li>
             <li>Text only · {PHONE}</li>
             <li><a href="/contact#quote">Request a quote</a></li>
-            <li>Serving homeowners across Alberta</li>
+            <li>Based in Edmonton, Alberta</li>
           </ul>
         </div>
       </div>
@@ -127,7 +147,8 @@ FOOTER = f"""    <section class="quote-band">
     <script src="js/main.js"></script>"""
 
 
-def page(title: str, desc: str, active: str, body: str, extra_head: str = "") -> str:
+def page(title: str, desc: str, active: str, body: str, extra_head: str = "", path: str = "/") -> str:
+    url = f"{SITE}/" if path == "/" else f"{SITE}{path}"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,15 +156,17 @@ def page(title: str, desc: str, active: str, body: str, extra_head: str = "") ->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{desc}">
+  <link rel="canonical" href="{url}">
   <link rel="icon" type="image/jpeg" href="assets/images/mark-thistle.jpg">
   <link rel="apple-touch-icon" href="assets/images/mark-thistle.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <meta property="og:url" content="{url}">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
-  <meta property="og:image" content="assets/images/hero-home.jpg">
+  <meta property="og:image" content="{SITE}/assets/images/hero-home.jpg">
   {extra_head}
 </head>
 <body>
@@ -164,10 +187,10 @@ HOME = f"""
       </div>
       <div class="hero-content">
         <img class="hero-logo" src="assets/images/logo-wide.png" alt="Thistle Flooring">
-        <p class="hero-kicker">Premium residential installation</p>
+        <p class="hero-kicker">Edmonton, Alberta</p>
         <h1>Precision Flooring.<br>Beautifully Installed.</h1>
         <hr class="gold-rule">
-        <p class="hero-sub">Vinyl, laminate, hardwood, and carpet — sourced with care and installed to a finish you can live on for years.</p>
+        <p class="hero-sub">Vinyl, laminate, hardwood, and carpet — sourced with care and installed to a finish you can live on for years. A locally owned Edmonton studio.</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="/contact#quote">Get a Free Quote</a>
           <a class="btn btn-outline" href="/gallery">View Our Work</a>
@@ -176,13 +199,17 @@ HOME = f"""
       <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
     </section>
 
+    <div class="place-bar">
+      Locally owned · based in <strong>Edmonton, Alberta</strong> · serving the capital region
+    </div>
+
     <section class="section">
       <div class="wrap split">
         <div class="split-copy">
           <p class="eyebrow">The studio</p>
           <h2>Floors that feel considered — not hurried.</h2>
           <hr class="gold-rule">
-          <p class="lead">Thistle Flooring is a premium installation company for homeowners who want the job done once, and done properly. We source quality vinyl, laminate, hardwood, and carpet, then install with the patience of a craftsman: square, quiet, and finished to the baseboard.</p>
+          <p class="lead">Thistle Flooring is a premium installation company based in Edmonton, Alberta, for homeowners who want the job done once, and done properly. We source quality vinyl, laminate, hardwood, and carpet, then install with the patience of a craftsman: square, quiet, and finished to the baseboard.</p>
           <p>From a single kitchen to a whole-home replacement, every project is measured, planned, and completed with the same standard — clean lines, honest pricing, and workmanship you can live with.</p>
           <div class="stat-row">
             <div><strong>$3</strong><span>Vinyl click / sq ft<br>material + labour</span></div>
@@ -190,7 +217,7 @@ HOME = f"""
             <div><strong>Free</strong><span>Winter carpet tear-out</span></div>
           </div>
         </div>
-        <img src="assets/gallery/vinyl-living-open.jpg" alt="Open-concept living room with newly installed grey vinyl click flooring">
+        <img src="assets/gallery/vinyl-rec-room-walnut.jpg" alt="Edmonton rec room with newly installed walnut vinyl click flooring">
       </div>
     </section>
 
@@ -201,7 +228,7 @@ HOME = f"""
         <p class="lead">Whether you want waterproof vinyl in the kitchen, quiet carpet on the stairs, or hardwood that ages with the house — we source it and we install it.</p>
         <div class="services-grid">
           <a class="svc-card" href="/services#vinyl">
-            <img src="assets/gallery/vinyl-kitchen-grey.jpg" alt="Grey vinyl click kitchen floor">
+            <img src="assets/gallery/vinyl-living-walnut.jpg" alt="Walnut vinyl click living room floor">
             <span class="num">01</span>
             <h3>Vinyl</h3>
             <p>Waterproof, quiet underfoot, and built for real life — including vinyl click at a clear, all-in rate.</p>
@@ -259,6 +286,7 @@ HOME = f"""
           <div>
             <p class="eyebrow">Recent installations</p>
             <h2>Work from the floor up.</h2>
+            <p class="lead" style="margin-top:8px;">Just in: walnut vinyl click throughout an Edmonton rec room — from carpet tear-out to a finished floor.</p>
           </div>
           <a class="btn btn-outline-dark" href="/gallery">Full gallery</a>
         </div>
@@ -268,7 +296,7 @@ HOME = f"""
             <img src="assets/gallery/{fn}" alt="{cap}" loading="lazy">
             <figcaption>{cap}</figcaption>
           </figure>"""
-    for fn, cat, cap in GALLERY[:8]
+    for fn, cat, cap in PREVIEW
 ) + """
         </div>
       </div>
@@ -400,9 +428,15 @@ WINTER = f"""
             <p class="note" style="margin:16px 0 0;">Mention the Winter Hibernation Special when you write or text. Availability is limited and offered at our discretion for qualifying projects.</p>
           </div>
         </div>
-        <div>
-          <img src="assets/gallery/carpet-residential-beige.jpg" alt="Freshly installed residential carpet" style="height:auto;margin-bottom:18px;">
-          <img src="assets/gallery/vinyl-bedroom-grey.jpg" alt="Bedroom with new grey vinyl click flooring" style="height:320px;object-fit:cover;">
+        <div class="before-after">
+          <figure>
+            <img src="assets/gallery/vinyl-carpet-tearout.jpg" alt="Carpet tear-out in progress before a vinyl click install">
+            <figcaption>Before · complimentary carpet tear-out</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/gallery/vinyl-living-walnut.jpg" alt="The same room finished in walnut vinyl click">
+            <figcaption>After · walnut vinyl click</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -487,7 +521,7 @@ GALLERY_PAGE = f"""
       <div class="page-hero-body">
         <p class="eyebrow" style="color:var(--gold)">Our work</p>
         <h1>Floors, finished.</h1>
-        <p class="lead">A selection of recent vinyl click, hardwood, and carpet installations — residential and commercial.</p>
+        <p class="lead">A selection of recent vinyl click, hardwood, and carpet installations across Edmonton and Alberta — including our latest walnut vinyl click rec-room install.</p>
       </div>
     </section>
 
@@ -531,8 +565,10 @@ CONTACT = f"""
             <dd>{MAIL}</dd>
             <dt>Phone · text only</dt>
             <dd><a href="{SMS}">{PHONE}</a></dd>
+            <dt>Based in</dt>
+            <dd>Edmonton, Alberta</dd>
             <dt>Service</dt>
-            <dd>Vinyl · Laminate · Hardwood · Carpet<br>Alberta homeowners &amp; light commercial</dd>
+            <dd>Vinyl · Laminate · Hardwood · Carpet<br>Edmonton homeowners &amp; light commercial</dd>
           </dl>
           <p style="margin-top:28px;"><button type="button" class="btn btn-gold" id="copy-email" data-email="{MAIL}">Copy email address</button></p>
         </aside>
@@ -587,39 +623,45 @@ CONTACT = f"""
 pages = {
     "index.html": page(
         "Thistle Flooring — Precision Flooring. Beautifully Installed.",
-        "Premium vinyl, laminate, hardwood, and carpet sourcing and installation. Vinyl click from $3/sq ft. Serving Alberta homeowners.",
+        "Premium vinyl, laminate, hardwood, and carpet sourcing and installation. Vinyl click from $3/sq ft. Based in Edmonton, Alberta.",
         "home",
         HOME,
+        path="/",
     ),
     "services.html": page(
         "Services — Vinyl, Laminate, Hardwood & Carpet | Thistle Flooring",
         "Vinyl click installation at $3 per square foot including material and labour. Laminate, hardwood, and carpet sourcing and professional installation.",
         "services",
         SERVICES,
+        path="/services",
     ),
     "winter-special.html": page(
         "Winter Hibernation Special | Thistle Flooring",
         "Limited-time offer: free carpet tear-out and demolition when you install new carpet, vinyl click, or laminate with Thistle Flooring.",
         "winter",
         WINTER,
+        path="/winter-special",
     ),
     "kitchen-revival.html": page(
         "Express Kitchen Floor Revival | Thistle Flooring",
         "Complete kitchen floor demolition and vinyl click installation in a single day for $500 plus the cost of material. Baseboards and appliances included.",
         "kitchen",
         KITCHEN,
+        path="/kitchen-revival",
     ),
     "gallery.html": page(
         "Our Work — Installation Gallery | Thistle Flooring",
         "A gallery of recent Thistle Flooring installations: vinyl click, hardwood, and carpet — residential and commercial.",
         "gallery",
         GALLERY_PAGE,
+        path="/gallery",
     ),
     "contact.html": page(
         "Get a Free Quote | Thistle Flooring",
-        "Request a complimentary flooring quote. Email thistleflooringinstalls@gmail.com or text (587) 594-8169.",
+        "Request a complimentary flooring quote from Thistle Flooring in Edmonton, Alberta. Email thistleflooringinstalls@gmail.com or text (587) 594-8169.",
         "contact",
         CONTACT,
+        path="/contact",
     ),
     "404.html": page(
         "Page not found | Thistle Flooring",

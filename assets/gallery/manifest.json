@@ -1,5 +1,61 @@
 [
   {
+    "file": "vinyl-living-walnut.jpg",
+    "cat": "vinyl",
+    "caption": "Living room \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-rec-room-walnut.jpg",
+    "cat": "vinyl",
+    "caption": "Rec room \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-open-kitchen-walnut.jpg",
+    "cat": "vinyl",
+    "caption": "Open living and kitchen \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-hallway-gym.jpg",
+    "cat": "vinyl",
+    "caption": "Hallway \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-hallway-weights.jpg",
+    "cat": "vinyl",
+    "caption": "Hallway transition \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-stair-landing-walnut.jpg",
+    "cat": "vinyl",
+    "caption": "Stair landing \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-living-vent.jpg",
+    "cat": "vinyl",
+    "caption": "Living area \u2014 walnut vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
+    "file": "vinyl-carpet-tearout.jpg",
+    "cat": "vinyl",
+    "caption": "Carpet tear-out for vinyl click",
+    "w": 720,
+    "h": 960
+  },
+  {
     "file": "vinyl-install-progress-walnut.jpg",
     "cat": "vinyl",
     "caption": "Vinyl Click install in progress \u2014 walnut planks",
