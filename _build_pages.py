@@ -60,19 +60,17 @@ def header(active: str) -> str:
 
     return f"""    <a class="skip" href="#main">Skip to content</a>
     <div class="announce">
-      <a href="/winter-special"><span class="full">Winter Hibernation Special — complimentary carpet tear-out with new flooring</span><span class="short">Winter Special — free carpet tear-out</span></a>
-      <span class="dot"></span>
-      <a href="/kitchen-revival">Express Kitchen Floor Revival — one-day kitchen swap from $500 + material</a>
+      <a href="/contact#quote">Edmonton flooring installation · Get a free quote</a>
     </div>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Thistle Flooring home">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
         </a>
-        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
         </button>
-        <nav class="nav" aria-label="Primary">
+        <nav class="nav" id="primary-nav" aria-label="Primary">
           <a href="/services"{cls("services")}>Services</a>
           <a href="/winter-special"{cls("winter")}>Winter Special</a>
           <a href="/kitchen-revival"{cls("kitchen")}>Kitchen Revival</a>
@@ -84,7 +82,11 @@ def header(active: str) -> str:
     </header>"""
 
 
-FOOTER = f"""    <section class="quote-band">
+FOOTER = f"""    <nav class="mobile-contact" aria-label="Quick contact">
+      <a href="{SMS}">Text us</a>
+      <a class="btn btn-gold" href="/contact#quote">Free quote</a>
+    </nav>
+    <section class="quote-band">
       <div class="wrap">
         <p class="eyebrow" style="color:var(--gold)">Complimentary consultation</p>
         <h2>Ready for floors you’ll be proud of?</h2>
@@ -144,7 +146,7 @@ FOOTER = f"""    <section class="quote-band">
         <span>Precision Flooring. Beautifully Installed.</span>
       </div>
     </footer>
-    <script src="js/main.js"></script>"""
+    <script src="js/main.js?v=20260913"></script>"""
 
 
 def page(title: str, desc: str, active: str, body: str, extra_head: str = "", path: str = "/") -> str:
@@ -171,7 +173,7 @@ def page(title: str, desc: str, active: str, body: str, extra_head: str = "", pa
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260913">
   <meta property="og:url" content="{url}">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
@@ -192,14 +194,13 @@ def page(title: str, desc: str, active: str, body: str, extra_head: str = "", pa
 HOME = f"""
     <section class="hero">
       <div class="hero-media" aria-hidden="true">
-        <img src="assets/images/hero-home.jpg" alt="" fetchpriority="high">
+        <img src="assets/gallery/vinyl-rec-room-walnut.jpg" alt="" fetchpriority="high">
       </div>
       <div class="hero-content">
-        <img class="hero-logo" src="assets/images/logo-wide.png" alt="Thistle Flooring">
         <p class="hero-kicker">Edmonton, Alberta</p>
-        <h1>Precision Flooring.<br>Beautifully Installed.</h1>
+        <h1>Edmonton flooring.<br>Beautifully installed.</h1>
         <hr class="gold-rule">
-        <p class="hero-sub">Vinyl, laminate, hardwood, and carpet — sourced with care and installed to a finish you can live on for years. A locally owned Edmonton studio.</p>
+        <p class="hero-sub">Vinyl, laminate, hardwood, and carpet, supplied and installed by a locally owned Edmonton company. Tell us about your room for a free quote.</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="/contact#quote">Get a Free Quote</a>
           <a class="btn btn-outline" href="/gallery">View Our Work</a>
@@ -215,13 +216,13 @@ HOME = f"""
     <section class="section">
       <div class="wrap split">
         <div class="split-copy">
-          <p class="eyebrow">The studio</p>
+          <p class="eyebrow">Your local flooring installer</p>
           <h2>Floors that feel considered — not hurried.</h2>
           <hr class="gold-rule">
           <p class="lead">Thistle Flooring is a premium installation company based in Edmonton, Alberta, for homeowners who want the job done once, and done properly. We source quality vinyl, laminate, hardwood, and carpet, then install with the patience of a craftsman: square, quiet, and finished to the baseboard.</p>
           <p>From a single kitchen to a whole-home replacement, every project is measured, planned, and completed with the same standard — clean lines, honest pricing, and workmanship you can live with.</p>
           <div class="stat-row">
-            <div><strong>$3</strong><span>Vinyl click / sq ft<br>material + labour</span></div>
+            <div><strong>From $3</strong><span>Vinyl click / sq ft<br>material + labour</span></div>
             <div><strong>1 day</strong><span>Kitchen floor revival</span></div>
             <div><strong>Free</strong><span>Winter carpet tear-out</span></div>
           </div>
@@ -240,7 +241,7 @@ HOME = f"""
             <img src="assets/gallery/vinyl-living-walnut.jpg" alt="Walnut vinyl click living room floor">
             <span class="num">01</span>
             <h3>Vinyl</h3>
-            <p>Waterproof, quiet underfoot, and built for real life — including vinyl click at a clear, all-in rate.</p>
+            <p>Waterproof, quiet underfoot, and built for real life — including vinyl click with material and labour pricing confirmed in your quote.</p>
             <div class="price">From $3 / sq ft installed</div>
           </a>
           <a class="svc-card" href="/services#laminate">
@@ -283,7 +284,7 @@ HOME = f"""
             <img src="assets/images/hero-kitchen.jpg" alt="Sunlit kitchen with new light oak vinyl plank flooring">
             <span class="badge">One day</span>
             <h3>Express Kitchen Floor Revival</h3>
-            <p>Full kitchen demolition and vinyl click install in a single day — $500 plus the cost of material.</p>
+            <p>Kitchen demolition and vinyl click installation from $500 plus material. Most kitchens completed in one day; scope confirmed before booking.</p>
           </a>
         </div>
       </div>
@@ -342,10 +343,10 @@ SERVICES = f"""
               <li>Ideal for busy households and moisture-prone rooms</li>
             </ul>
             <div class="price-lock">
-              <em>$3</em>
-              <span>per square foot for Vinyl Click — includes material and labour.</span>
+              <em>From $3</em>
+              <span>per square foot for Vinyl Click — includes material and labour. Ask us to confirm the material selection and full scope for your project.</span>
             </div>
-            <p style="margin-top:22px;"><a class="btn btn-forest" href="/contact#quote">Request a vinyl quote</a></p>
+            <p style="margin-top:22px;"><a class="btn btn-forest" href="/contact?project=Vinyl%20Click#quote">Request a vinyl quote</a></p>
           </div>
         </article>
 
@@ -362,7 +363,7 @@ SERVICES = f"""
               <li>Stair nosing and matching trims available</li>
               <li>A refined look at a practical investment</li>
             </ul>
-            <p style="margin-top:22px;"><a class="btn btn-forest" href="/contact#quote">Request a laminate quote</a></p>
+            <p style="margin-top:22px;"><a class="btn btn-forest" href="/contact?project=Laminate#quote">Request a laminate quote</a></p>
           </div>
         </article>
 
@@ -379,7 +380,7 @@ SERVICES = f"""
               <li>Staircases, landings, and detailed perimeter work</li>
               <li>A heirloom surface when you want the real thing</li>
             </ul>
-            <p style="margin-top:22px;"><a class="btn btn-forest" href="/contact#quote">Request a hardwood quote</a></p>
+            <p style="margin-top:22px;"><a class="btn btn-forest" href="/contact?project=Hardwood#quote">Request a hardwood quote</a></p>
           </div>
         </article>
 
@@ -433,7 +434,7 @@ WINTER = f"""
               <li>Removal of tack strip and debris from the work area</li>
               <li>Professional installation of your new floor</li>
             </ul>
-            <a class="btn btn-gold" href="/contact#quote">Request this offer</a>
+            <a class="btn btn-gold" href="/contact?project=Winter%20Hibernation%20Special#quote">Request this offer</a>
             <p class="note" style="margin:16px 0 0;">Mention the Winter Hibernation Special when you write or text. Availability is limited and offered at our discretion for qualifying projects.</p>
           </div>
         </div>
@@ -475,15 +476,15 @@ KITCHEN = f"""
           <div class="offer-panel" style="margin-top:28px;">
             <p class="limited">Signature service</p>
             <div class="offer-price">$500 <small>+ cost of material</small></div>
-            <p>Complete kitchen floor demolition and vinyl click installation in one day.</p>
+            <p>Kitchen floor demolition and vinyl click installation, with material billed separately. Most kitchens are completed in one day.</p>
             <ul class="include-list">
               <li>Full demolition of the existing kitchen floor</li>
-              <li>Vinyl click flooring installed the same day</li>
+              <li>Vinyl click installation — usually completed the same day</li>
               <li>Re-installation of baseboards</li>
               <li>Moving of appliances as needed</li>
             </ul>
-            <a class="btn btn-gold" href="/contact#quote">Book a kitchen revival</a>
-            <p class="note" style="margin:16px 0 0;">Material is selected with you and billed separately. Most kitchens complete in a single day; unusual layouts or extensive subfloor repair may require additional time.</p>
+            <a class="btn btn-gold" href="/contact?project=Express%20Kitchen%20Floor%20Revival#quote">Book a kitchen revival</a>
+            <p class="note" style="margin:16px 0 0;">Material is selected with you and billed separately. Before booking, we’ll confirm whether your kitchen qualifies for the $500 offer, the total price, and the expected schedule. Unusual layouts or extensive subfloor repair may require additional time.</p>
           </div>
         </div>
       </div>
@@ -563,7 +564,7 @@ CONTACT = f"""
       </div>
     </section>
 
-    <section class="section" id="quote">
+    <section class="section">
       <div class="wrap contact-layout">
         <aside class="contact-card">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring" style="height:64px;width:auto;margin-bottom:22px;">
@@ -571,7 +572,7 @@ CONTACT = f"""
           <p>Quotes are complimentary. Text is the fastest way to reach us; email is perfect for photos and measurements.</p>
           <dl>
             <dt>Email</dt>
-            <dd>{MAIL}</dd>
+            <dd><a href="mailto:{MAIL}">{MAIL}</a></dd>
             <dt>Phone · text only</dt>
             <dd><a href="{SMS}">{PHONE}</a></dd>
             <dt>Based in</dt>
@@ -582,11 +583,11 @@ CONTACT = f"""
           <p style="margin-top:28px;"><button type="button" class="btn btn-gold" id="copy-email" data-email="{MAIL}">Copy email address</button></p>
         </aside>
 
-        <div>
+        <div class="quote-form-panel" id="quote">
           <p class="eyebrow">Quote request</p>
           <h2>Tell us about the floor.</h2>
-          <p class="form-note">We’ll email you back at the address you give. Nothing opens on your computer.</p>
-          <form id="quote-form" style="margin-top:28px;" novalidate>
+          <p class="form-note">We’ll reply by email to discuss your project, materials, and timing. Measurements are optional if you’re still planning.</p>
+          <form id="quote-form" style="margin-top:28px;">
             <div class="form-row">
               <label>Name *
                 <input type="text" name="name" required autocomplete="name" placeholder="Your name">
@@ -619,7 +620,7 @@ CONTACT = f"""
               <textarea name="message" placeholder="Rooms involved, existing floor, timing, and anything we should know."></textarea>
             </label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="form-success">Thank you — your quote request is on its way. We’ll be in touch shortly.</p>
+            <p class="form-success" role="status">Thank you — your quote request is on its way. We’ll be in touch shortly.</p>
             <p class="form-error" role="alert"></p>
             <button class="btn btn-gold" type="submit">Send quote request</button>
           </form>
@@ -631,7 +632,7 @@ CONTACT = f"""
 
 pages = {
     "index.html": page(
-        "Thistle Flooring — Precision Flooring. Beautifully Installed.",
+        "Edmonton Flooring Installation | Thistle Flooring",
         "Premium vinyl, laminate, hardwood, and carpet sourcing and installation. Vinyl click from $3/sq ft. Based in Edmonton, Alberta.",
         "home",
         HOME,
@@ -639,7 +640,7 @@ pages = {
     ),
     "services.html": page(
         "Services — Vinyl, Laminate, Hardwood & Carpet | Thistle Flooring",
-        "Vinyl click installation at $3 per square foot including material and labour. Laminate, hardwood, and carpet sourcing and professional installation.",
+        "Vinyl click installation from $3 per square foot including material and labour. Laminate, hardwood, and carpet sourcing and professional installation.",
         "services",
         SERVICES,
         path="/services",

@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260913">
   <meta property="og:url" content="https://thistle-flooring.com/kitchen-revival">
   <meta property="og:title" content="Express Kitchen Floor Revival | Thistle Flooring">
   <meta property="og:description" content="Complete kitchen floor demolition and vinyl click installation in a single day for $500 plus the cost of material. Baseboards and appliances included.">
@@ -30,19 +30,17 @@
 <body>
     <a class="skip" href="#main">Skip to content</a>
     <div class="announce">
-      <a href="/winter-special"><span class="full">Winter Hibernation Special — complimentary carpet tear-out with new flooring</span><span class="short">Winter Special — free carpet tear-out</span></a>
-      <span class="dot"></span>
-      <a href="/kitchen-revival">Express Kitchen Floor Revival — one-day kitchen swap from $500 + material</a>
+      <a href="/contact#quote">Edmonton flooring installation · Get a free quote</a>
     </div>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Thistle Flooring home">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
         </a>
-        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
         </button>
-        <nav class="nav" aria-label="Primary">
+        <nav class="nav" id="primary-nav" aria-label="Primary">
           <a href="/services">Services</a>
           <a href="/winter-special">Winter Special</a>
           <a href="/kitchen-revival" class="is-active">Kitchen Revival</a>
@@ -76,15 +74,15 @@
           <div class="offer-panel" style="margin-top:28px;">
             <p class="limited">Signature service</p>
             <div class="offer-price">$500 <small>+ cost of material</small></div>
-            <p>Complete kitchen floor demolition and vinyl click installation in one day.</p>
+            <p>Kitchen floor demolition and vinyl click installation, with material billed separately. Most kitchens are completed in one day.</p>
             <ul class="include-list">
               <li>Full demolition of the existing kitchen floor</li>
-              <li>Vinyl click flooring installed the same day</li>
+              <li>Vinyl click installation — usually completed the same day</li>
               <li>Re-installation of baseboards</li>
               <li>Moving of appliances as needed</li>
             </ul>
-            <a class="btn btn-gold" href="/contact#quote">Book a kitchen revival</a>
-            <p class="note" style="margin:16px 0 0;">Material is selected with you and billed separately. Most kitchens complete in a single day; unusual layouts or extensive subfloor repair may require additional time.</p>
+            <a class="btn btn-gold" href="/contact?project=Express%20Kitchen%20Floor%20Revival#quote">Book a kitchen revival</a>
+            <p class="note" style="margin:16px 0 0;">Material is selected with you and billed separately. Before booking, we’ll confirm whether your kitchen qualifies for the $500 offer, the total price, and the expected schedule. Unusual layouts or extensive subfloor repair may require additional time.</p>
           </div>
         </div>
       </div>
@@ -115,6 +113,10 @@
     </section>
 
   </main>
+    <nav class="mobile-contact" aria-label="Quick contact">
+      <a href="sms:5875948169">Text us</a>
+      <a class="btn btn-gold" href="/contact#quote">Free quote</a>
+    </nav>
     <section class="quote-band">
       <div class="wrap">
         <p class="eyebrow" style="color:var(--gold)">Complimentary consultation</p>
@@ -175,6 +177,6 @@
         <span>Precision Flooring. Beautifully Installed.</span>
       </div>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20260913"></script>
 </body>
 </html>

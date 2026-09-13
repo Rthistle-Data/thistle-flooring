@@ -78,3 +78,9 @@ Source job photos stay in local `pictures/` (not deployed). Regenerating pages:
 ```bash
 python3 _build_pages.py
 ```
+
+## Verification
+
+Run `node --test tests/server.test.mjs` to check public routes, blocked internal files, and invalid quote handling without sending email. The test server uses a temporary local port.
+
+Public files are restricted in `server.mjs` to the page routes, stylesheet, browser script, robots/sitemap files, and supported image/font files in `assets/images` and `assets/gallery`. Add new public resources to that allowlist deliberately.

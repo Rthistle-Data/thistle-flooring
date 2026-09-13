@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260913">
   <meta property="og:url" content="https://thistle-flooring.com/contact">
   <meta property="og:title" content="Get a Free Quote | Thistle Flooring">
   <meta property="og:description" content="Request a complimentary flooring quote from Thistle Flooring in Edmonton, Alberta. Email thistleflooringinstalls@gmail.com or text (587) 594-8169.">
@@ -30,19 +30,17 @@
 <body>
     <a class="skip" href="#main">Skip to content</a>
     <div class="announce">
-      <a href="/winter-special"><span class="full">Winter Hibernation Special — complimentary carpet tear-out with new flooring</span><span class="short">Winter Special — free carpet tear-out</span></a>
-      <span class="dot"></span>
-      <a href="/kitchen-revival">Express Kitchen Floor Revival — one-day kitchen swap from $500 + material</a>
+      <a href="/contact#quote">Edmonton flooring installation · Get a free quote</a>
     </div>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Thistle Flooring home">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
         </a>
-        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
         </button>
-        <nav class="nav" aria-label="Primary">
+        <nav class="nav" id="primary-nav" aria-label="Primary">
           <a href="/services">Services</a>
           <a href="/winter-special">Winter Special</a>
           <a href="/kitchen-revival">Kitchen Revival</a>
@@ -65,7 +63,7 @@
       </div>
     </section>
 
-    <section class="section" id="quote">
+    <section class="section">
       <div class="wrap contact-layout">
         <aside class="contact-card">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring" style="height:64px;width:auto;margin-bottom:22px;">
@@ -73,7 +71,7 @@
           <p>Quotes are complimentary. Text is the fastest way to reach us; email is perfect for photos and measurements.</p>
           <dl>
             <dt>Email</dt>
-            <dd>thistleflooringinstalls@gmail.com</dd>
+            <dd><a href="mailto:thistleflooringinstalls@gmail.com">thistleflooringinstalls@gmail.com</a></dd>
             <dt>Phone · text only</dt>
             <dd><a href="sms:5875948169">(587) 594-8169</a></dd>
             <dt>Based in</dt>
@@ -84,11 +82,11 @@
           <p style="margin-top:28px;"><button type="button" class="btn btn-gold" id="copy-email" data-email="thistleflooringinstalls@gmail.com">Copy email address</button></p>
         </aside>
 
-        <div>
+        <div class="quote-form-panel" id="quote">
           <p class="eyebrow">Quote request</p>
           <h2>Tell us about the floor.</h2>
-          <p class="form-note">We’ll email you back at the address you give. Nothing opens on your computer.</p>
-          <form id="quote-form" style="margin-top:28px;" novalidate>
+          <p class="form-note">We’ll reply by email to discuss your project, materials, and timing. Measurements are optional if you’re still planning.</p>
+          <form id="quote-form" style="margin-top:28px;">
             <div class="form-row">
               <label>Name *
                 <input type="text" name="name" required autocomplete="name" placeholder="Your name">
@@ -121,7 +119,7 @@
               <textarea name="message" placeholder="Rooms involved, existing floor, timing, and anything we should know."></textarea>
             </label>
             <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="form-success">Thank you — your quote request is on its way. We’ll be in touch shortly.</p>
+            <p class="form-success" role="status">Thank you — your quote request is on its way. We’ll be in touch shortly.</p>
             <p class="form-error" role="alert"></p>
             <button class="btn btn-gold" type="submit">Send quote request</button>
           </form>
@@ -130,6 +128,10 @@
     </section>
 
   </main>
+    <nav class="mobile-contact" aria-label="Quick contact">
+      <a href="sms:5875948169">Text us</a>
+      <a class="btn btn-gold" href="/contact#quote">Free quote</a>
+    </nav>
     <section class="quote-band">
       <div class="wrap">
         <p class="eyebrow" style="color:var(--gold)">Complimentary consultation</p>
@@ -190,6 +192,6 @@
         <span>Precision Flooring. Beautifully Installed.</span>
       </div>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20260913"></script>
 </body>
 </html>

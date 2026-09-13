@@ -306,19 +306,24 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  fs.stat(filePath, (err, stat) => {
-    if (!err && stat.isFile()) {
-      streamFile(req, res, filePath);
+  // Only explicitly public resources may be served from the project directory.
+  const relative = path.relative(ROOT, filePath).split(path.sep).join("/");
+  const publicFiles = new Set(["css/styles.css", "js/main.js", "robots.txt", "sitemap.xml"]);
+  const publicAsset = /^assets\/(images|gallery)\/[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp|gif|svg|ico|woff2)$/.test(relative);
+  if (!publicFiles.has(relative) && !publicAsset) {
+    serve404(req, res);
+    return;
+  }
+  fs.realpath(filePath, (err, realPath) => {
+    // Do not follow symlinks, even inside an otherwise public asset directory.
+    if (err || realPath !== filePath) {
+      serve404(req, res);
       return;
     }
-    if (!err && stat.isDirectory()) {
-      const index = path.join(filePath, "index.html");
-      if (fs.existsSync(index)) {
-        streamFile(req, res, index);
-        return;
-      }
-    }
-    serve404(req, res);
+    fs.stat(realPath, (statError, stat) => {
+      if (statError || !stat.isFile()) return serve404(req, res);
+      streamFile(req, res, realPath);
+    });
   });
 });
 

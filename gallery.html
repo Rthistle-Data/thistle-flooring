@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260913">
   <meta property="og:url" content="https://thistle-flooring.com/gallery">
   <meta property="og:title" content="Our Work — Installation Gallery | Thistle Flooring">
   <meta property="og:description" content="A gallery of recent Thistle Flooring installations: vinyl click, hardwood, and carpet — residential and commercial.">
@@ -30,19 +30,17 @@
 <body>
     <a class="skip" href="#main">Skip to content</a>
     <div class="announce">
-      <a href="/winter-special"><span class="full">Winter Hibernation Special — complimentary carpet tear-out with new flooring</span><span class="short">Winter Special — free carpet tear-out</span></a>
-      <span class="dot"></span>
-      <a href="/kitchen-revival">Express Kitchen Floor Revival — one-day kitchen swap from $500 + material</a>
+      <a href="/contact#quote">Edmonton flooring installation · Get a free quote</a>
     </div>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Thistle Flooring home">
           <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
         </a>
-        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
         </button>
-        <nav class="nav" aria-label="Primary">
+        <nav class="nav" id="primary-nav" aria-label="Primary">
           <a href="/services">Services</a>
           <a href="/winter-special">Winter Special</a>
           <a href="/kitchen-revival">Kitchen Revival</a>
@@ -200,6 +198,10 @@
 
 
   </main>
+    <nav class="mobile-contact" aria-label="Quick contact">
+      <a href="sms:5875948169">Text us</a>
+      <a class="btn btn-gold" href="/contact#quote">Free quote</a>
+    </nav>
     <section class="quote-band">
       <div class="wrap">
         <p class="eyebrow" style="color:var(--gold)">Complimentary consultation</p>
@@ -260,6 +262,6 @@
         <span>Precision Flooring. Beautifully Installed.</span>
       </div>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20260913"></script>
 </body>
 </html>

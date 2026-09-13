@@ -15,12 +15,14 @@
       const open = nav.classList.toggle("is-open");
       toggle.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
     nav.querySelectorAll("a").forEach((a) =>
       a.addEventListener("click", () => {
         nav.classList.remove("is-open");
         toggle.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
       })
     );
   }
@@ -90,6 +92,11 @@
   /* ── quote form → server email ── */
   const form = document.getElementById("quote-form");
   if (form) {
+    const requestedProject = new URLSearchParams(window.location.search).get("project");
+    const projectSelect = form.querySelector('select[name="project"]');
+    if (projectSelect && Array.from(projectSelect.options).some((option) => option.value === requestedProject)) {
+      projectSelect.value = requestedProject;
+    }
     const ok = form.querySelector(".form-success");
     const errEl = form.querySelector(".form-error");
     const btn = form.querySelector('button[type="submit"]');
@@ -102,6 +109,7 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (!form.reportValidity()) return;
       const data = new FormData(form);
       const payload = {
         name: (data.get("name") || "").toString().trim(),
