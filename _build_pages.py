@@ -65,7 +65,7 @@ def header(active: str) -> str:
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Thistle Flooring home">
-          <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
+          <img src="assets/images/logo-sharp.png" alt="Thistle Flooring">
         </a>
         <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
@@ -110,7 +110,7 @@ FOOTER = f"""    <nav class="mobile-contact" aria-label="Quick contact">
     <footer class="site-footer">
       <div class="wrap-wide footer-grid">
         <div class="footer-brand">
-          <img src="assets/images/logo-wide.png" alt="Thistle Flooring">
+          <img src="assets/images/logo-sharp.png" alt="Thistle Flooring">
           <p>Based in Edmonton, Alberta. Precision sourcing and installation of vinyl, laminate, hardwood, and carpet. Craftsmanship you can live with.</p>
         </div>
         <div>
@@ -173,7 +173,7 @@ def page(title: str, desc: str, active: str, body: str, extra_head: str = "", pa
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20260913">
+  <link rel="stylesheet" href="css/styles.css?v=20260913-logo">
   <meta property="og:url" content="{url}">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
@@ -567,7 +567,7 @@ CONTACT = f"""
     <section class="section">
       <div class="wrap contact-layout">
         <aside class="contact-card">
-          <img src="assets/images/logo-wide.png" alt="Thistle Flooring" style="height:64px;width:auto;margin-bottom:22px;">
+          <img src="assets/images/logo-sharp.png" alt="Thistle Flooring" style="height:64px;width:auto;margin-bottom:22px;">
           <h3>Speak with us directly</h3>
           <p>Quotes are complimentary. Text is the fastest way to reach us; email is perfect for photos and measurements.</p>
           <dl>
